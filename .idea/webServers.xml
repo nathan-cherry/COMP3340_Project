@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="771c5695-3f0c-406f-9457-f8cb12eb0235" name="Server">
+        <fileTransfer accessType="SFTP" host="cherryn.myweb.cs.uwindsor.ca" port="22" sshConfigId="1bf45994-8fae-4ee0-b6c7-f74f16656691" sshConfig="cherryn@cherryn.myweb.cs.uwindsor.ca:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

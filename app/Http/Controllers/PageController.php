@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PageController extends Controller
+{
+    public function index(){
+        $title = 'NIMSE';
+//        return view('pages.splash', compact('title'));
+        return view('pages.splash')->with('title', $title);
+    }
+
+    public function mission(){
+        $data = array(
+            'title' => 'Mission',
+            'services' => ['web design', 'programming','SEO'],
+        );
+        return view('test')->with($data);
+    }
+
+    public function legal(){
+        return view('test');
+    }
+}

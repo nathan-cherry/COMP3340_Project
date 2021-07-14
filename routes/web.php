@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('pages.splash');
+//});
+//
+//Route::get('/test', function () {
+//    return view('test');
+//});
+
+Route::get('/', 'PageController@index');
+Route::get('/mission', 'PageController@mission');
+Route::get('/legal', 'PageController@legal');
+
+Route::resource('products', 'ProductsController');
