@@ -85,10 +85,10 @@
                 </div>
 
                 <div class="links">
-                    <a href="#">All</a>
-                    <a href="#">Men</a>
-                    <a href="#">Women</a>
-                    <a href="#">Kids</a>
+                    <a href="/products">All</a>
+                    <a href="/products/men">Men</a>
+                    <a href="/products/women">Women</a>
+                    <a href="/products/kids">Kids</a>
                 </div>
             </div>
         </div>

@@ -14,7 +14,40 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('name', 'asc')->get();
+        return view('products.index')->with('products', $products);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function men()
+    {
+        $products = Product::where('type', 'men')->get();
+        return view('products.index')->with('products', $products);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function women()
+    {
+        $products = Product::where('type', 'women')->get();
+        return view('products.index')->with('products', $products);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function kids()
+    {
+        $products = Product::where('type', 'kids')->get();
         return view('products.index')->with('products', $products);
     }
 
@@ -47,7 +80,8 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return view('products.show')->with('product', $product);
     }
 
     /**

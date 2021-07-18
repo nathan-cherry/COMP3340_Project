@@ -23,4 +23,9 @@ Route::get('/', 'PageController@index');
 Route::get('/mission', 'PageController@mission');
 Route::get('/legal', 'PageController@legal');
 
+
+Route::get('/products/men', 'ProductsController@men');
+Route::get('/products/women', 'ProductsController@women');
+Route::get('/products/kids', 'ProductsController@kids');
 Route::resource('products', 'ProductsController');
+
