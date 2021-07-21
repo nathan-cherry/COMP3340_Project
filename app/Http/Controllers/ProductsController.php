@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Product;
 
@@ -14,7 +15,12 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('name', 'asc')->get();
+//        $products = Product::orderBy('name', 'asc')->get();
+        $products = Product::orderBy('name', 'asc')->paginate(9);
+//        $data = array(
+//            'products' => $products,
+//            'sub-heading' => "NIMSE makes it our mission to provide a variety of products so that there will always be something for everyone.",
+//        );
         return view('products.index')->with('products', $products);
     }
 
@@ -25,7 +31,7 @@ class ProductsController extends Controller
      */
     public function men()
     {
-        $products = Product::where('type', 'men')->get();
+        $products = Product::where('type', 'men')->paginate(12);
         return view('products.index')->with('products', $products);
     }
 
@@ -36,7 +42,7 @@ class ProductsController extends Controller
      */
     public function women()
     {
-        $products = Product::where('type', 'women')->get();
+        $products = Product::where('type', 'women')->paginate(12);
         return view('products.index')->with('products', $products);
     }
 
@@ -58,7 +64,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -69,7 +75,22 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'type' => 'required',
+            'price' => 'required',
+            'state' => 'required',
+            'stock' => 'required',
+        ]);
+        // Create Product
+        $product = new Product;
+        $product->name = $request->input('name');
+        $product->type = $request->input('type');
+        $product->price = $request->input('price');
+        $product->state = $request->input('state');
+        $product->stock = $request->input('stock');
+        $product->save();
+        return redirect('/products')->with('success', 'Product Created');
     }
 
     /**
@@ -92,7 +113,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('products.edit')->with('product', $product);
     }
 
     /**
@@ -104,7 +126,22 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'type' => 'required',
+            'price' => 'required',
+            'state' => 'required',
+            'stock' => 'required',
+        ]);
+        // Create Product
+        $product = Product::find($id);
+        $product->name = $request->input('name');
+        $product->type = $request->input('type');
+        $product->price = $request->input('price');
+        $product->state = $request->input('state');
+        $product->stock = $request->input('stock');
+        $product->save();
+        return redirect('/products')->with('success', 'Product Updated');
     }
 
     /**
@@ -115,6 +152,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/products')->with('success', 'Deleted Product');
     }
 }
