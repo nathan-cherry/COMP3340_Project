@@ -33,7 +33,7 @@
                                         <form action="">
 
                                         </form>
-                                    <a href="" type="button"
+                                    <a href="/cart/create/{{$product->id}}" type="button"
                                        class="btn btn-sm btn-outline-secondary">Add</a>
                                     @endauth
                                 </div>

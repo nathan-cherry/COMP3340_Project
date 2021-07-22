@@ -37,6 +37,7 @@ Route::resource('products', 'ProductsController');
 
 // Cart Controller
 Route::resource('cart', 'CartController');
+Route::get('/cart/create/{id}', 'CartController@createOrder');
 
 Auth::routes();
 
