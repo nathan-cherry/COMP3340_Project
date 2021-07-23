@@ -9,6 +9,17 @@ use App\Cart;
 
 class CartController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -72,7 +83,17 @@ class CartController extends Controller
     public function show($id)
     {
         $cart = Cart::where('user_id', $id)->get();
-        return view('cart.show')->with('cart', $cart);
+        $data = array(
+            'cart' => $cart,
+            'id' => $id,
+        );
+
+        if(auth()->user()->isAdmin or auth()->user()->id == $id){
+            return view('cart.show')->with($data);
+        } else {
+            return redirect('/products')->with('error', 'Unauthorized request');
+        }
+
     }
 
     /**
@@ -84,7 +105,11 @@ class CartController extends Controller
     public function edit($id)
     {
         $order = Cart::find($id);
-        return view('cart.edit')->with('order', $order);
+        if(auth()->user()->isAdmin or auth()->user()->id == $order->user->id){
+            return view('cart.edit')->with('order', $order);
+        } else {
+            return redirect('/products')->with('error', 'Unauthorized request');
+        }
     }
 
     /**

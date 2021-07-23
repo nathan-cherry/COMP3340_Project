@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Edit Product</h1>
-    {!! Form::open(['action' => ['ProductsController@update', $product->id], 'method'=> 'POST']) !!}
+    {!! Form::open(['action' => ['ProductsController@update', $product->id], 'method'=> 'POST', 'enctype'=> 'multipart/form-data']) !!}
     <div class="form-group">
         {{Form::label('name', 'Name')}}
         {{Form::text('name', $product->name, ['class' => 'form-control', 'placeholder' => 'Name'])}}
@@ -14,6 +14,10 @@
     <div class="form-group">
         {{Form::label('price', 'Price')}}
         {{Form::text('price', $product->price, ['class' => 'form-control', 'placeholder' => '12.50'])}}
+    </div>
+    <div class="form-group">
+        {{Form::label('image', 'Image')}}
+        {{Form::file('image', ['class' => 'form-control-file'])}}
     </div>
     <div class="form-group">
         {{Form::label('state', 'State')}}

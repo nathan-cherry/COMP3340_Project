@@ -4,12 +4,12 @@
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Shopping Cart</div>
+                @auth
+                    <div class="card">
+                        <div class="card-header">Shopping Cart</div>
 
-                    <div class="card-body">
-                        <div class="container">
-                            @auth
+                        <div class="card-body">
+                            <div class="container">
                                 @foreach($cart as $order)
                                     <div class="row">
                                         <div class="col-md-6">
@@ -19,7 +19,8 @@
                                             <p class="align-middle">{{$order->quantity}}</p>
                                         </div>
                                         <div class="col-md-2">
-                                            <p class="align-middle">${{sprintf('%0.2f', $order->quantity * $order->product->price)}}</p>
+                                            <p class="align-middle">
+                                                ${{sprintf('%0.2f', $order->quantity * $order->product->price)}}</p>
                                         </div>
                                         <div class="col-md-2">
                                             <a href="/cart/{{$order->id}}/edit" class="text-muted">edit</a>
@@ -32,10 +33,10 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            @endauth
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endauth
             </div>
         </div>
     </div>

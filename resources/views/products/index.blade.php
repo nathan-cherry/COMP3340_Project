@@ -18,9 +18,9 @@
             @foreach($products as $product)
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" style="height: 25vh"
-                             src=""
-                             alt="Card image cap">
+                        <img class="card-img-top" style="height: 25vh;"
+                             src="/storage/product_images/{{$product->image_path}}"
+                             alt="Card image">
                         <div class="card-body">
                             <p class="card-text"><b>{{$product->name}}</b></p>
                             {{--                            <p class="card-text text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.--}}
