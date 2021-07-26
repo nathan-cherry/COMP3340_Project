@@ -9,7 +9,7 @@
         <p>All of our products are produced within Canada and no profit is made on any purchase. After the employees
             are paid, the rest of our income goes right towards our partnership with the WWF. </p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <a class="btn btn-primary btn-lg" href="{{ url('/mission') }}" role="button">Learn more</a>
         </p>
 
     </div>

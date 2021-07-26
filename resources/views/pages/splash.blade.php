@@ -74,12 +74,12 @@
             Team
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Nathan Cherry</a>
-            <a class="dropdown-item" href="#">Ian Straatman</a>
-            <a class="dropdown-item" href="#">Marko Milovic</a>
-            <a class="dropdown-item" href="#">Sehaj Khaira</a>
-            <a class="dropdown-item" href="#">Ehabuddin Mohammed</a>
-            <a class="btn btn-success ml-4 mr-4" style="width: 209px;" href="#">Apply Now!</a>
+            <a class="dropdown-item" href="{{ url('/nathan') }}">Nathan Cherry</a>
+            <a class="dropdown-item" href="{{ url('/ian') }}">Ian Straatman</a>
+            <a class="dropdown-item" href="{{ url('/marko') }}">Marko Milovic</a>
+            <a class="dropdown-item" href="{{ url('/sehaj') }}">Sehaj Khaira</a>
+            <a class="dropdown-item" href="{{ url('/ehu') }}">Ehabuddin Mohammed</a>
+            <a class="btn btn-success ml-4 mr-4" style="width: 209px;" href="{{ url('/join') }}">Apply Now!</a>
         </div>
         <a href="{{ url('/legal') }}">Legal</a>
         <a href="{{ url('/contact') }}">Contact</a>
