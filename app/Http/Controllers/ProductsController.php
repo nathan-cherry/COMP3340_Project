@@ -16,7 +16,7 @@ class ProductsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'men', 'women', 'kids']]);
     }
     /**
      * Display a listing of the resource.
@@ -63,7 +63,7 @@ class ProductsController extends Controller
      */
     public function kids()
     {
-        $products = Product::where('type', 'kids')->get();
+        $products = Product::where('type', 'kids')->paginate(12);
         return view('products.index')->with('products', $products);
     }
 
@@ -119,7 +119,7 @@ class ProductsController extends Controller
         $product->stock = $request->input('stock');
         $product->image_path = $fileNameToStore;
         $product->save();
-        return redirect('/products')->with('success', 'Product Created');
+        return redirect('/admin/products')->with('success', 'Product Created');
     }
 
     /**
@@ -190,7 +190,7 @@ class ProductsController extends Controller
             $product->image_path = $fileNameToStore;
         }
         $product->save();
-        return redirect('/products')->with('success', 'Product Updated');
+        return redirect('/admin/products')->with('success', 'Product Updated');
     }
 
     /**
@@ -210,6 +210,6 @@ class ProductsController extends Controller
             Storage::delete('public/product_images/'.$product->image_path);
         }
         $product->delete();
-        return redirect('/products')->with('success', 'Deleted Product');
+        return redirect('/admin/products')->with('success', 'Deleted Product');
     }
 }

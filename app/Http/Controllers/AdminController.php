@@ -1,0 +1,152 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Product;
+use App\Cart;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class AdminController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // Must be authenticated to be on any admin page
+        $this->middleware('auth', ['except' => []]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        if (!auth()->user()->isAdmin) {
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            $data = array(
+                'orders' => Cart::orderBy('created_at', 'asc')->take(5)->get(),
+                'products' => Product::orderBy('name', 'asc')->take(5)->get(),
+                'users' => User::orderBy('id', 'asc')->take(5)->get(),
+            );
+            return view('admin.index')->with($data);
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showOrders()
+    {
+        if (!auth()->user()->isAdmin) {
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            $data = array(
+                'orders' => Cart::orderBy('created_at', 'asc')->paginate(10),
+            );
+            return view('admin.orders')->with($data);
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showProducts()
+    {
+        if (!auth()->user()->isAdmin) {
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            $data = array(
+                'products' => Product::orderBy('id', 'asc')->paginate(10),
+            );
+            return view('admin.products')->with($data);
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showUsers()
+    {
+        if (!auth()->user()->isAdmin) {
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            $data = array(
+                'users' => User::orderBy('id', 'asc')->paginate(10),
+            );
+            return view('admin.users')->with($data);
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editUser($id)
+    {
+        if (!auth()->user()->isAdmin) {
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            $user = User::find($id);
+            return view('admin.userEdit')->with('user', $user);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateUser(Request $request, $id)
+    {
+        if (!auth()->user()->isAdmin) {
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            $this->validate($request, [
+                'name' => 'required|min:4|string|max:255',
+                'email' => 'required|email|string|max:255'
+            ]);
+            // Update User
+            $user = User::find($id);
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->isAdmin = $request->input('isAdmin');
+            $user->save();
+            return redirect('/admin/users')->with('success', 'User Updated');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyUser($id)
+    {
+        if (!auth()->user()->isAdmin) {
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            $user = User::find($id);
+            $user->delete();
+            return redirect('/admin/users')->with('success', 'User Deleted');
+        }
+    }
+}

@@ -42,3 +42,16 @@ Route::get('/cart/create/{id}', 'CartController@createOrder');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Admin Controller
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/orders', 'AdminController@showOrders');
+Route::get('/admin/products', 'AdminController@showProducts');
+Route::get('/admin/users', 'AdminController@showUsers');
+
+Route::get('/admin/user/{id}/edit', 'AdminController@editUser');
+Route::put('/admin/user/{id}', 'AdminController@updateUser');
+Route::delete('/admin/user/{id}', 'AdminController@destroyUser');
+
+

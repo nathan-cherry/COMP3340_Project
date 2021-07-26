@@ -37,7 +37,7 @@
                                        class="btn btn-sm btn-outline-secondary">Add</a>
                                     @endauth
                                 </div>
-                                <small class="text-muted">$15.99</small>
+                                <small class="text-muted">${{$product->price}}</small>
                             </div>
                         </div>
                     </div>
@@ -52,5 +52,6 @@
     </div>
     @else
         <p>No posts found!</p>
+        </div>
     @endif
 @endsection

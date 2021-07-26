@@ -58,6 +58,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if(Auth::user()->isAdmin)
+                                    <a class="dropdown-item" href="/admin">
+                                        Admin
+                                    </a>
+                                    @endif
                                     <a class="dropdown-item" href="/cart/{{Auth::user()->id}}">
                                         Shopping Cart
                                     </a>
