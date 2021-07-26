@@ -22,15 +22,15 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark ">
 
-                    <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 
 
                 
-        <a  class="nav-link link-dark" href="{{ url('/mission') }}">Mission<span class="sr-only">(current)</span></a>
-        <a  class="nav-link" href="{{ url('/history') }}">History<span class="sr-only">(current)</span></a>
+        <a  class="nav-link link-dark" href="/mission">Mission<span class="sr-only">(current)</span></a>
+        <a  class="nav-link" href="/history">History<span class="sr-only">(current)</span></a>
        
-        <a  class="nav-link" href="{{ url('/legal') }}">Legal<span class="sr-only">(current)</span></a>
-        <a  class="nav-link" href="{{ url('/contact') }}">Contact<span class="sr-only">(current)</span></a>
+        <a  class="nav-link" href="/legal">Legal<span class="sr-only">(current)</span></a>
+        <a  class="nav-link" href="/contact">Contact<span class="sr-only">(current)</span></a>
         
         </div>
     </nav>

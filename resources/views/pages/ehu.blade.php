@@ -10,30 +10,30 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark ">
        
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <a class="dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Team
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="{{ url('/nathan') }}">Nathan Cherry</a>
-            <a class="dropdown-item" href="{{ url('/ian') }}">Ian Straatman</a>
-            <a class="dropdown-item" href="{{ url('/marko') }}">Marko Milovic</a>
-            <a class="dropdown-item" href="{{ url('/sehaj') }}">Sehaj Khaira</a>
-            <a class="dropdown-item" href="{{ url('/ehu') }}">Ehabuddin Mohammed</a>
-            <a class="btn btn-success ml-4 mr-4" style="width: 209px;" href="{{ url('/join') }}">Apply Now!</a>
-        </div>
-                    <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
-                
+       <div class="collapse navbar-collapse" id="navbarNavDropdown">
+       <a class="dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Team
+       </a>
+       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+           <a class="dropdown-item" href="/nathan">Nathan Cherry</a>
+           <a class="dropdown-item" href="/ian">Ian Straatman</a>
+           <a class="dropdown-item" href="/marko">Marko Milovic</a>
+           <a class="dropdown-item" href="/sehaj">Sehaj Khaira</a>
+           <a class="dropdown-item" href="/ehu">Ehabuddin Mohammed</a>
+           <a class="btn btn-success ml-4 mr-4" style="width: 209px;" href="{{ url('/join') }}">Apply Now!</a>
+       </div>
+                   <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+               
 
-                
-        <a  class="nav-link link-dark" href="{{ url('/mission') }}">Mission<span class="sr-only">(current)</span></a>
-        <a  class="nav-link" href="{{ url('/history') }}">History<span class="sr-only">(current)</span></a>
+               
+       <a  class="nav-link link-dark" href="/mission">Mission<span class="sr-only">(current)</span></a>
+       <a  class="nav-link" href="/history">History<span class="sr-only">(current)</span></a>
+      
+       <a  class="nav-link" href="/legal">Legal<span class="sr-only">(current)</span></a>
+       <a  class="nav-link" href="/contact">Contact<span class="sr-only">(current)</span></a>
        
-        <a  class="nav-link" href="{{ url('/legal') }}">Legal<span class="sr-only">(current)</span></a>
-        <a  class="nav-link" href="{{ url('/contact') }}">Contact<span class="sr-only">(current)</span></a>
-        
-        </div>
-    </nav>
+       </div>
+   </nav>
 
     <div class="mt-5 ml-5 mr-5 mb-5">
 
