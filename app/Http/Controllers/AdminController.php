@@ -33,7 +33,7 @@ class AdminController extends Controller
         } else {
             $data = array(
                 'orders' => Cart::orderBy('created_at', 'asc')->take(5)->get(),
-                'products' => Product::orderBy('name', 'asc')->take(5)->get(),
+                'products' => Product::orderBy('id', 'asc')->take(5)->get(),
                 'users' => User::orderBy('id', 'asc')->take(5)->get(),
             );
             return view('admin.index')->with($data);
