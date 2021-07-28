@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Theme;
 use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
@@ -27,11 +28,11 @@ class ProductsController extends Controller
     {
 //        $products = Product::orderBy('name', 'asc')->get();
         $products = Product::orderBy('name', 'asc')->paginate(9);
-//        $data = array(
-//            'products' => $products,
-//            'sub-heading' => "NIMSE makes it our mission to provide a variety of products so that there will always be something for everyone.",
-//        );
-        return view('products.index')->with('products', $products);
+        $data = array(
+            'products' => $products,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
+        return view('products.index')->with($data);
     }
 
     /**
@@ -42,7 +43,11 @@ class ProductsController extends Controller
     public function men()
     {
         $products = Product::where('type', 'men')->paginate(12);
-        return view('products.index')->with('products', $products);
+        $data = array(
+            'products' => $products,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
+        return view('products.index')->with($data);
     }
 
     /**
@@ -53,7 +58,11 @@ class ProductsController extends Controller
     public function women()
     {
         $products = Product::where('type', 'women')->paginate(12);
-        return view('products.index')->with('products', $products);
+        $data = array(
+            'products' => $products,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
+        return view('products.index')->with($data);
     }
 
     /**
@@ -64,7 +73,11 @@ class ProductsController extends Controller
     public function kids()
     {
         $products = Product::where('type', 'kids')->paginate(12);
-        return view('products.index')->with('products', $products);
+        $data = array(
+            'products' => $products,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
+        return view('products.index')->with($data);
     }
 
     /**
@@ -74,7 +87,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $data = array(
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
+        return view('products.create')->with($data);
     }
 
     /**
@@ -131,7 +147,11 @@ class ProductsController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-        return view('products.show')->with('product', $product);
+        $data = array(
+            'product' => $product,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
+        return view('products.show')->with($data);
     }
 
     /**
@@ -143,7 +163,11 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('products.edit')->with('product', $product);
+        $data = array(
+            'product' => $product,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
+        return view('products.edit')->with($data);
     }
 
     /**

@@ -2,6 +2,9 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="COMP3340, Project, Dynamic, eCommerce">
+    <meta name="author" content="Nathan Cherry">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
@@ -23,8 +26,24 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+@if(isset($theme))
+    @if($theme->type == 'light')
+        <div id="app" style="background-color: whitesmoke">
+            <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
+    @elseif($theme->type == 'dark')
+        <div id="app" style="background-color: #121212">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+    @elseif($theme->type == 'crazy')
+        <div id="app" style="background-color: lightgoldenrodyellow">
+            <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
+    @elseif($theme->type == 'default')
+        <div id="app">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+    @endif
+@else
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+@endif
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

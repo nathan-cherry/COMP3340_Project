@@ -54,4 +54,7 @@ Route::get('/admin/user/{id}/edit', 'AdminController@editUser');
 Route::put('/admin/user/{id}', 'AdminController@updateUser');
 Route::delete('/admin/user/{id}', 'AdminController@destroyUser');
 
+Route::get('/admin/theme/change', 'AdminController@changeTheme');
+Route::post('/admin/theme/', 'AdminController@storeTheme');
+
 

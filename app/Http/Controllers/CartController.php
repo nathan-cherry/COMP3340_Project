@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Theme;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Cart;
@@ -49,7 +50,11 @@ class CartController extends Controller
     public function createOrder($id)
     {
         $product = Product::find($id);
-        return view('cart.create')->with('product', $product);
+        $data = array(
+            'product' => $product,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
+        return view('cart.create')->with($data);
     }
 
 
@@ -86,6 +91,7 @@ class CartController extends Controller
         $data = array(
             'cart' => $cart,
             'id' => $id,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
 
         if(auth()->user()->isAdmin or auth()->user()->id == $id){
@@ -105,8 +111,12 @@ class CartController extends Controller
     public function edit($id)
     {
         $order = Cart::find($id);
+        $data = array(
+            'order' => $order,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
         if(auth()->user()->isAdmin or auth()->user()->id == $order->user->id){
-            return view('cart.edit')->with('order', $order);
+            return view('cart.edit')->with($data);
         } else {
             return redirect('/products')->with('error', 'Unauthorized request');
         }

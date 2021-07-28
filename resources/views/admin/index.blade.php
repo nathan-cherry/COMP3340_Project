@@ -8,6 +8,25 @@
         <hr class="my-4">
     </div>
     <div class="row">
+        <h3>Theme</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" style="width: 90%">Theme</th>
+                <th scope="col" style="width: 10%">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><h6 class="p-1">{{$theme->type}}</h6></th>
+                    <td>
+                        <a href="/admin/theme/change" class="btn btn-secondary">Change</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
         <h3>Orders</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">

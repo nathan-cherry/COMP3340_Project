@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Theme;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -26,6 +27,10 @@ class HomeController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        return view('home')->with('user', $user);
+        $data = array(
+            'user' => $user,
+            'theme' => Theme::orderBy('created_at', 'desc')->first(),
+        );
+        return view('home')->with($data);
     }
 }

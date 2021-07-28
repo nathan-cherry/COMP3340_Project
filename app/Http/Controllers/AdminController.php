@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Cart;
+use App\Theme;
 use App\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,6 +37,7 @@ class AdminController extends Controller
                 'orders' => Cart::orderBy('created_at', 'asc')->take(5)->get(),
                 'products' => Product::orderBy('id', 'asc')->take(5)->get(),
                 'users' => User::orderBy('id', 'asc')->take(5)->get(),
+                'theme' => Theme::orderBy('created_at', 'desc')->first(),
             );
             return view('admin.index')->with($data);
         }
@@ -52,6 +55,7 @@ class AdminController extends Controller
         } else {
             $data = array(
                 'orders' => Cart::orderBy('created_at', 'asc')->paginate(10),
+                'theme' => Theme::orderBy('created_at', 'desc')->first(),
             );
             return view('admin.orders')->with($data);
         }
@@ -69,6 +73,7 @@ class AdminController extends Controller
         } else {
             $data = array(
                 'products' => Product::orderBy('id', 'asc')->paginate(10),
+                'theme' => Theme::orderBy('created_at', 'desc')->first(),
             );
             return view('admin.products')->with($data);
         }
@@ -86,6 +91,7 @@ class AdminController extends Controller
         } else {
             $data = array(
                 'users' => User::orderBy('id', 'asc')->paginate(10),
+                'theme' => Theme::orderBy('created_at', 'desc')->first(),
             );
             return view('admin.users')->with($data);
         }
@@ -103,7 +109,11 @@ class AdminController extends Controller
             return redirect('/')->with('error', 'Unauthorized User');
         } else {
             $user = User::find($id);
-            return view('admin.userEdit')->with('user', $user);
+            $data = array(
+                'user' => $user,
+                'theme' => Theme::orderBy('created_at', 'desc')->first(),
+            );
+            return view('admin.userEdit')->with($data);
         }
     }
 
@@ -147,6 +157,47 @@ class AdminController extends Controller
             $user = User::find($id);
             $user->delete();
             return redirect('/admin/users')->with('success', 'User Deleted');
+        }
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changeTheme()
+    {
+        if (!auth()->user()->isAdmin) {
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            $data = array(
+                'theme' => Theme::orderBy('created_at', 'desc')->first(),
+            );
+            return view('admin.theme')->with($data);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeTheme(Request $request)
+    {
+        if (!auth()->user()->isAdmin) {
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            $this->validate($request, [
+                'type' => 'required',
+            ]);
+
+            // Create Product
+            $theme = new Theme;
+            $theme->type = $request->input('type');
+            $theme->save();
+            return redirect('/admin')->with('success', 'Theme Changed');
         }
     }
 }
