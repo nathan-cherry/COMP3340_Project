@@ -4,7 +4,7 @@
     <div class="row mt-5 mb-5">
         <div class="col-md-4">
             <div class="border border-secondary text-center rounded" style="width: 100%; height: 100%;">
-                <img class="m-4" src="{{url("/storage/product_images/$product->image_path")}}" alt="Product Image" style="height: 25vh">
+                <img class="m-4" src="{{url("/public/storage/product_images/$product->image_path")}}" alt="Product Image" style="height: 25vh">
             </div>
         </div>
         <div class="col-md-8">
