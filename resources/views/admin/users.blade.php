@@ -4,7 +4,7 @@
     <div class="jumbotron">
         <h1 class="display-4">Admin Panel - Users</h1>
         <hr class="my-4">
-        <a href="/admin" class="btn btn-dark">Back</a>
+        <a href="{{url('/admin')}}" class="btn btn-dark">Back</a>
     </div>
     <div class="row">
         <h3>Users</h3>
@@ -31,8 +31,8 @@
                     @endif
                     <td>
                         {!! Form::open(['action' => ['AdminController@destroyUser', $user->id], 'method'=> 'POST']) !!}
-                        <a href="/cart/{{$user->id}}" class="btn btn-secondary">View Cart</a>
-                        <a href="/admin/user/{{$user->id}}/edit" class="btn btn-warning">edit</a>
+                        <a href="{{url("/cart/$user->id")}}" class="btn btn-secondary">View Cart</a>
+                        <a href="{{url("/admin/user/$user->id/edit")}}" class="btn btn-warning">edit</a>
                         {{Form::hidden('_method','DELETE') }}
                         {{Form::submit('Delete',['class'=>'btn btn-danger']) }}
                         {!! Form::close() !!}

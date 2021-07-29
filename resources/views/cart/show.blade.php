@@ -23,7 +23,7 @@
                                                 ${{sprintf('%0.2f', $order->quantity * $order->product->price)}}</p>
                                         </div>
                                         <div class="col-md-2">
-                                            <a href="/cart/{{$order->id}}/edit" class="text-muted">edit</a>
+                                            <a href="{{url("/cart/$order->id/edit")}}" class="text-muted">edit</a>
                                         </div>
                                         <div class="col-md-1">
                                             {!! Form::open(['action' => ['CartController@destroy', $order->id], 'method'=> 'POST']) !!}

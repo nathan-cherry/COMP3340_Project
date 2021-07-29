@@ -91,10 +91,10 @@
         </div>
 
         <div class="links">
-            <a href="/products">All</a>
-            <a href="/products/men">Men</a>
-            <a href="/products/women">Women</a>
-            <a href="/products/kids">Kids</a>
+            <a href="{{url('/products/')}}">All</a>
+            <a href="{{url('/products/men')}}">Men</a>
+            <a href="{{url('/products/women')}}">Women</a>
+            <a href="{{url('/products/kids')}}">Kids</a>
         </div>
     </div>
 </div>

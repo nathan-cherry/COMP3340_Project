@@ -20,7 +20,7 @@
                 <tr>
                     <th scope="row"><h6 class="p-1">{{$theme->type}}</h6></th>
                     <td>
-                        <a href="/admin/theme/change" class="btn btn-secondary">Change</a>
+                        <a href="{{url("/admin/theme/change")}}" class="btn btn-secondary">Change</a>
                     </td>
                 </tr>
             </tbody>
@@ -47,7 +47,7 @@
                     <td>{{$order->quantity}}</td>
                     <td>
                         {!! Form::open(['action' => ['CartController@destroy', $order->id], 'method'=> 'POST']) !!}
-                        <a href="/cart/{{$order->id}}/edit" class="btn btn-warning">edit</a>
+                        <a href="{{url("/cart/$order->id/edit")}}" class="btn btn-warning">edit</a>
                         {{Form::hidden('_method','DELETE') }}
                         {{Form::submit('Delete',['class'=>'btn btn-danger']) }}
                         {!! Form::close() !!}
@@ -87,8 +87,8 @@
                     @endif
                     <td>
                         {!! Form::open(['action' => ['ProductsController@destroy', $product->id], 'method'=> 'POST']) !!}
-                        <a href="/products/{{$product->id}}/" class="btn btn-secondary">View</a>
-                        <a href="/products/{{$product->id}}/edit" class="btn btn-warning">edit</a>
+                        <a href="{{url("/products/$product->id")}}" class="btn btn-secondary">View</a>
+                        <a href="{{url("/products/$product->id/edit")}}" class="btn btn-warning">edit</a>
                         {{Form::hidden('_method','DELETE') }}
                         {{Form::submit('Delete',['class'=>'btn btn-danger']) }}
                         {!! Form::close() !!}
@@ -124,8 +124,8 @@
                     @endif
                     <td>
                         {!! Form::open(['action' => ['AdminController@destroyUser', $user->id], 'method'=> 'POST']) !!}
-                        <a href="/cart/{{$user->id}}" class="btn btn-secondary">View Cart</a>
-                        <a href="/admin/user/{{$user->id}}/edit" class="btn btn-warning">edit</a>
+                        <a href="{{url("/cart/$user->id")}}" class="btn btn-secondary">View Cart</a>
+                        <a href="{{url("/admin/user/$user->id/edit")}}" class="btn btn-warning">edit</a>
                         {{Form::hidden('_method','DELETE') }}
                         {{Form::submit('Delete',['class'=>'btn btn-danger']) }}
                         {!! Form::close() !!}

@@ -4,11 +4,11 @@
     <div class="jumbotron">
         <h1 class="display-4">Admin Panel - Products</h1>
         <hr class="my-4">
-        <a href="/admin" class="btn btn-dark">Back</a>
+        <a href="{{url('/admin')}}" class="btn btn-dark">Back</a>
     </div>
     <div class="row">
         <h3>Products</h3>
-        <a href="/products/create" class="btn btn-primary ml-auto mb-3">Add +</a>
+        <a href="{{url("/products/create")}}" class="btn btn-primary ml-auto mb-3">Add +</a>
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
@@ -36,8 +36,8 @@
                     @endif
                     <td>
                         {!! Form::open(['action' => ['ProductsController@destroy', $product->id], 'method'=> 'POST']) !!}
-                        <a href="/products/{{$product->id}}/" class="btn btn-secondary">View</a>
-                        <a href="/products/{{$product->id}}/edit" class="btn btn-warning">edit</a>
+                        <a href="{{url("/products/$product->id")}}" class="btn btn-secondary">View</a>
+                        <a href="{{url("/products/$product->id/edit")}}" class="btn btn-warning">edit</a>
                         {{Form::hidden('_method','DELETE') }}
                         {{Form::submit('Delete',['class'=>'btn btn-danger']) }}
                         {!! Form::close() !!}

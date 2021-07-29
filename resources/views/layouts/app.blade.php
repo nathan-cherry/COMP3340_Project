@@ -78,11 +78,11 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if(Auth::user()->isAdmin)
-                                    <a class="dropdown-item" href="/admin">
+                                    <a class="dropdown-item" href="{{url("/admin")}}">
                                         Admin
                                     </a>
                                     @endif
-                                    <a class="dropdown-item" href="/cart/{{Auth::user()->id}}">
+                                    <a class="dropdown-item" href="{{url("/cart/". Auth::user()->id)}}">
                                         Shopping Cart
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

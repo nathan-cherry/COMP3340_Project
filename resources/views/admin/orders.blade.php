@@ -4,7 +4,7 @@
     <div class="jumbotron">
         <h1 class="display-4">Admin Panel - Orders</h1>
         <hr class="my-4">
-        <a href="/admin" class="btn btn-dark">Back</a>
+        <a href="{{url('/admin')}}" class="btn btn-dark">Back</a>
     </div>
     <div class="row">
         <h3>Orders</h3>
@@ -27,7 +27,7 @@
                     <td>{{$order->quantity}}</td>
                     <td>
                         {!! Form::open(['action' => ['CartController@destroy', $order->id], 'method'=> 'POST']) !!}
-                        <a href="/cart/{{$order->id}}/edit" class="btn btn-warning">edit</a>
+                        <a href="{{url("/cart/$order->id/edit")}}" class="btn btn-warning">edit</a>
                         {{Form::hidden('_method','DELETE') }}
                         {{Form::submit('Delete',['class'=>'btn btn-danger']) }}
                         {!! Form::close() !!}
