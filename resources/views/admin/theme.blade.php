@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Create Product</h1>
+{{--    Theme create form--}}
     {!! Form::open(['action' => 'AdminController@storeTheme', 'method'=> 'POST', 'enctype'=> 'multipart/form-data']) !!}
 
         <div class="form-group">

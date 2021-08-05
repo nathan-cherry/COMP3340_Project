@@ -26,9 +26,23 @@
 <!-- Using Bootstraps CSS, we will simply have a page of generic text -->
 <!-- This will act as a static page and outline our fictional historical page for the  -->
 <!-- ecommerce Website -->
+<nav class="navbar navbar-expand-lg navbar-dark ">
+
+    <a class="nav-link" href="/COMP3340/Project/">Home <span class="sr-only">(current)</span></a>
+
+
+
+    <a  class="nav-link link-dark" href="/COMP3340/Project/mission">Mission<span class="sr-only">(current)</span></a>
+    <a  class="nav-link" href="/COMP3340/Project/history">History<span class="sr-only">(current)</span></a>
+
+    <a  class="nav-link" href="/COMP3340/Project/legal">Legal<span class="sr-only">(current)</span></a>
+    <a  class="nav-link" href="/COMP3340/Project/contact">Contact<span class="sr-only">(current)</span></a>
+
+
+</nav>
 <div class="container">
     <div class="row">
-        <div class="text-center" w-100>
+        <div class="text-center w-100" >
             <h1>NIMSE History</h1>
 
             <br>

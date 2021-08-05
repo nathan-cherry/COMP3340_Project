@@ -9,6 +9,7 @@
     <div class="row">
         <h3>Products</h3>
         <a href="{{url("/products/create")}}" class="btn btn-primary ml-auto mb-3">Add +</a>
+{{--        table for products--}}
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
@@ -21,6 +22,7 @@
             </tr>
             </thead>
             <tbody>
+{{--            row for each product--}}
             @foreach($products as $product)
                 <tr>
                     <th scope="row" class="text-center">{{$product->id}}</th>
@@ -47,6 +49,7 @@
             </tbody>
         </table>
     </div>
+{{--    links for pagination--}}
     <div class="row mt-4">
         <div class="text-xs-center ml-auto mr-auto">
             {{$products->links()}}

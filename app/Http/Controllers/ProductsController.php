@@ -17,6 +17,7 @@ class ProductsController extends Controller
      */
     public function __construct()
     {
+        // Middleware to require authenticate
         $this->middleware('auth', ['except' => ['index', 'show', 'men', 'women', 'kids']]);
     }
     /**
@@ -26,12 +27,14 @@ class ProductsController extends Controller
      */
     public function index()
     {
-//        $products = Product::orderBy('name', 'asc')->get();
+        // Get all products
         $products = Product::orderBy('name', 'asc')->paginate(9);
+        // Pass products and theme
         $data = array(
             'products' => $products,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
+        // Return product index view
         return view('products.index')->with($data);
     }
 
@@ -42,11 +45,13 @@ class ProductsController extends Controller
      */
     public function men()
     {
+        // Get all products for men
         $products = Product::where('type', 'men')->paginate(12);
         $data = array(
             'products' => $products,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
+        // Return product index view
         return view('products.index')->with($data);
     }
 
@@ -57,11 +62,13 @@ class ProductsController extends Controller
      */
     public function women()
     {
+        // Get all products for women
         $products = Product::where('type', 'women')->paginate(12);
         $data = array(
             'products' => $products,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
+        // Return product index view
         return view('products.index')->with($data);
     }
 
@@ -72,11 +79,13 @@ class ProductsController extends Controller
      */
     public function kids()
     {
+        // Get all products for kids
         $products = Product::where('type', 'kids')->paginate(12);
         $data = array(
             'products' => $products,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
+        // Return product index view
         return view('products.index')->with($data);
     }
 
@@ -87,10 +96,18 @@ class ProductsController extends Controller
      */
     public function create()
     {
+        // Get theme
         $data = array(
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
-        return view('products.create')->with($data);
+        // Test if authenticated user is an admin
+        if (!auth()->user()->isAdmin) {
+            // Not authorized redirect to home page with error message
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            // Return product create view
+            return view('products.create')->with($data);
+        }
     }
 
     /**
@@ -101,41 +118,49 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'type' => 'required',
-            'price' => 'required',
-            'state' => 'required',
-            'stock' => 'required',
-            'image' => 'image|nullable|max:1999'
-        ]);
+        // Test if authenticated user is an admin
+        if (!auth()->user()->isAdmin) {
+            // Not authorized redirect to home page with error message
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            // Validate Form
+            $this->validate($request, [
+                'name' => 'required',
+                'type' => 'required',
+                'price' => 'required',
+                'state' => 'required',
+                'stock' => 'required',
+                'image' => 'image|nullable|max:1999'
+            ]);
 
-        // Handle File Upload
-        if($request->hasFile('image')){
-            // Get just filename
-            $filenameWithExtension = $request->file('image')->getClientOriginalName();
-            // Just filename
-            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
-            // Get just extension
-            $extension = $request->file('image')->getClientOriginalExtension();
+            // Handle File Upload
+            if ($request->hasFile('image')) {
+                // Get just filename
+                $filenameWithExtension = $request->file('image')->getClientOriginalName();
+                // Just filename
+                $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+                // Get just extension
+                $extension = $request->file('image')->getClientOriginalExtension();
 
-            // To store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            // Upload
-            $path = $request->file('image')->storeAs('public/product_images', $fileNameToStore);
-        }else {
-            $fileNameToStore = 'noimage.jpg';
+                // To store
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                // Upload
+                $path = $request->file('image')->storeAs('public/product_images', $fileNameToStore);
+            } else {
+                $fileNameToStore = 'noimage.jpg';
+            }
+            // Create Product
+            $product = new Product;
+            $product->name = $request->input('name');
+            $product->type = $request->input('type');
+            $product->price = $request->input('price');
+            $product->state = $request->input('state');
+            $product->stock = $request->input('stock');
+            $product->image_path = $fileNameToStore;
+            $product->save();
+            // Redirect to products page
+            return redirect('/admin/products')->with('success', 'Product Created');
         }
-        // Create Product
-        $product = new Product;
-        $product->name = $request->input('name');
-        $product->type = $request->input('type');
-        $product->price = $request->input('price');
-        $product->state = $request->input('state');
-        $product->stock = $request->input('stock');
-        $product->image_path = $fileNameToStore;
-        $product->save();
-        return redirect('/admin/products')->with('success', 'Product Created');
     }
 
     /**
@@ -146,11 +171,13 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
+        // Get Product
         $product = Product::find($id);
         $data = array(
             'product' => $product,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
+        // Return product detail view
         return view('products.show')->with($data);
     }
 
@@ -162,11 +189,13 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
+        // Get product to edit
         $product = Product::find($id);
         $data = array(
             'product' => $product,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
+        // Return the edit page
         return view('products.edit')->with($data);
     }
 
@@ -179,42 +208,51 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'type' => 'required',
-            'price' => 'required',
-            'state' => 'required',
-            'stock' => 'required',
-            'image' => 'image|nullable|max:1999'
-        ]);
+        // Test if authenticated user is an admin
+        if (!auth()->user()->isAdmin) {
+            // Not authorized redirect to home page with error message
+            return redirect('/')->with('error', 'Unauthorized User');
+        } else {
+            // Validate form
+            $this->validate($request, [
+                'name' => 'required',
+                'type' => 'required',
+                'price' => 'required',
+                'state' => 'required',
+                'stock' => 'required',
+                'image' => 'image|nullable|max:1999'
+            ]);
 
-        // Handle File Upload
-        if($request->hasFile('image')){
-            // Get just filename
-            $filenameWithExtension = $request->file('image')->getClientOriginalName();
-            // Just filename
-            $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
-            // Get just extension
-            $extension = $request->file('image')->getClientOriginalExtension();
+            // Handle File Upload
+            if ($request->hasFile('image')) {
+                // Get just filename
+                $filenameWithExtension = $request->file('image')->getClientOriginalName();
+                // Just filename
+                $filename = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+                // Get just extension
+                $extension = $request->file('image')->getClientOriginalExtension();
 
-            // To store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            // Upload
-            $path = $request->file('image')->storeAs('public/product_images', $fileNameToStore);
+                // To store
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                // Upload
+                $path = $request->file('image')->storeAs('public/product_images', $fileNameToStore);
+            }
+
+            // Create Product
+            $product = Product::find($id);
+            $product->name = $request->input('name');
+            $product->type = $request->input('type');
+            $product->price = $request->input('price');
+            $product->state = $request->input('state');
+            $product->stock = $request->input('stock');
+            if ($request->hasFile('image')) {
+                $product->image_path = $fileNameToStore;
+            }
+            // Update
+            $product->save();
+            // Return to admin panel
+            return redirect('/admin/products')->with('success', 'Product Updated');
         }
-
-        // Create Product
-        $product = Product::find($id);
-        $product->name = $request->input('name');
-        $product->type = $request->input('type');
-        $product->price = $request->input('price');
-        $product->state = $request->input('state');
-        $product->stock = $request->input('stock');
-        if($request->hasFile('image')){
-            $product->image_path = $fileNameToStore;
-        }
-        $product->save();
-        return redirect('/admin/products')->with('success', 'Product Updated');
     }
 
     /**
@@ -225,15 +263,19 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
+        // Check if use is an admin
         if(!auth()->user()->isAdmin){
             return redirect('/products')->with('error', 'Unauthorized Request');
         }
+        // Get product
         $product = Product::find($id);
         if($product->image_path != 'noimage.jpg'){
             // Delete Image
             Storage::delete('public/product_images/'.$product->image_path);
         }
+        // Delete product
         $product->delete();
+        // Redirect back to admin panel
         return redirect('/admin/products')->with('success', 'Deleted Product');
     }
 }

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+{{--    Meta tags --}}
     <meta charset="utf-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="COMP3340, Project, eCommerce">
+    <meta name="author" content="Nathan Cherry">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -66,25 +70,27 @@
     </style>
 </head>
 <body>
+{{-- Nav bar--}}
 <div class="flex-center position-ref full-height">
     <div class="top-right links">
         <a href="{{ url('/mission') }}">Mission</a>
         <a href="{{ url('/history') }}">History</a>
-        <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="dropdown-toggle btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Team
-        </a>
+        </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Nathan Cherry</a>
-            <a class="dropdown-item" href="#">Ian Straatman</a>
-            <a class="dropdown-item" href="#">Marko Milovic</a>
-            <a class="dropdown-item" href="#">Sehaj Khaira</a>
-            <a class="dropdown-item" href="#">Ehabuddin Mohammed</a>
-            <a class="btn btn-success ml-4 mr-4" style="width: 209px;" href="#">Apply Now!</a>
+            <a class="dropdown-item" href="{{ url('/nathan') }}">Nathan Cherry</a>
+            <a class="dropdown-item" href="{{ url('/ian') }}">Ian Straatman</a>
+            <a class="dropdown-item" href="{{ url('/marko') }}">Marko Milovic</a>
+            <a class="dropdown-item" href="{{ url('/sehaj') }}">Sehaj Khaira</a>
+            <a class="dropdown-item" href="{{ url('/ehu') }}">Ehabuddin Mohammed</a>
+            <a class="btn btn-success ml-4 mr-4" style="width: 209px;" href="{{ url('/join') }}">Apply Now!</a>
         </div>
         <a href="{{ url('/legal') }}">Legal</a>
         <a href="{{ url('/contact') }}">Contact</a>
     </div>
 
+{{--    Title and product sections --}}
     <div class="content">
         <div class="title m-b-md">
             NIMSE

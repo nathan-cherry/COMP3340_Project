@@ -8,6 +8,7 @@
     </div>
     <div class="row">
         <h3>Orders</h3>
+{{--        Table for orders--}}
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
@@ -19,6 +20,7 @@
             </tr>
             </thead>
             <tbody>
+{{--            Row for each order --}}
             @foreach($orders as $order)
                 <tr>
                     <th scope="row" class="text-center">{{$order->id}}</th>
@@ -37,6 +39,7 @@
             </tbody>
         </table>
     </div>
+{{--    Pagination link --}}
     <div class="row mt-4">
         <div class="text-xs-center ml-auto mr-auto">
             {{$orders->links()}}

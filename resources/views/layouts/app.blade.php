@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+{{--    Template for all dynmaic pages --}}
     <meta charset="utf-8">
     <meta name="description" content="Free Web tutorials">
     <meta name="keywords" content="COMP3340, Project, Dynamic, eCommerce">
@@ -26,6 +27,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+{{-- Set the theme --}}
 @if(isset($theme))
     @if($theme->type == 'light')
         <div id="app" style="background-color: whitesmoke">
@@ -44,6 +46,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
 @endif
+{{--            Nav bar --}}
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -102,6 +105,7 @@
             </div>
         </nav>
 
+{{--        Container section (what get filled by other templates) --}}
         <div class="container">
             @include('inc.messages')
             @yield('content')
@@ -113,19 +117,8 @@
                 <!-- Section: Social media -->
                 <section class="mb-4">
 
-                    <!-- Twitter -->
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                    ><i class="fa fa-twitter"></i
-                        ></a>
-
-
-                    <!-- Instagram -->
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                    ><i class="fa fa-instagram"></i
-                        ></a>
-
                     <!-- Github -->
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/nathan-cherry/COMP3340_Project.git" role="button"
                     ><i class="fa fa-github"></i
                         ></a>
                 </section>
@@ -141,6 +134,7 @@
             <!-- Copyright -->
         </footer>
     </div>
+{{--                Bootstrap scripts--}}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>

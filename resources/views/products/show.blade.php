@@ -12,10 +12,12 @@
                 <div class="col-md-8">
                     <h1>{{$product->name}}</h1>
                 </div>
+{{--                 Show product info --}}
                 <div class="col-md-4">
                     <div class="float-right" style="padding: 5px 0;">
                         {!! Form::open(['action' => ['ProductsController@destroy', $product->id], 'method'=> 'POST']) !!}
                         <a href="{{url("/products")}}" class="btn btn-dark">Back</a>
+{{--                        If admin then generate action buttons --}}
                         @auth
                             @if(Auth::user()->isAdmin)
                                 <a href="{{url("/products/$product->id/edit")}}" class="btn btn-warning">edit</a>
@@ -27,6 +29,7 @@
                     </div>
                 </div>
             </div>
+{{--            Add to cart button if authenticated user --}}
             <div class="row p-3">
                 @auth
                     <a href="{{url("/cart/create/$product->id")}}" type="button"

@@ -8,6 +8,7 @@
     </div>
     <div class="row">
         <h3>Users</h3>
+{{--        Users table--}}
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
@@ -19,6 +20,7 @@
             </tr>
             </thead>
             <tbody>
+{{--            Make row for each record--}}
             @foreach($users as $user)
                 <tr>
                     <th scope="row" class="text-center">{{$user->id}}</th>
@@ -41,7 +43,9 @@
             @endforeach
             </tbody>
         </table>
+{{--        Table end--}}
     </div>
+{{--    Pagination link --}}
     <div class="row mt-4">
         <div class="text-xs-center ml-auto mr-auto">
             {{$users->links()}}

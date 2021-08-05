@@ -1,12 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+{{--    Admin panel jumbotron --}}
     <div class="jumbotron">
         <h1 class="display-4">Admin Panel</h1>
         <p class="lead">A monitoring page reporting the status of the website (and all its feature services) in terms of
             their working conditions (online/offline)</p>
         <hr class="my-4">
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">View Admin Documentation</a>
+        </p>
     </div>
+{{-- Theme section --}}
     <div class="row">
         <h3>Theme</h3>
         <table class="table table-bordered">
@@ -26,6 +31,7 @@
             </tbody>
         </table>
     </div>
+{{-- Order Section --}}
     <div class="row">
         <h3>Orders</h3>
         <table class="table table-bordered">
@@ -58,6 +64,7 @@
         </table>
         <a href="{{url('/admin/orders')}}" class="ml-auto">Show All Orders</a>
     </div>
+{{-- Product Section --}}
     <div class="row">
         <h3>Products</h3>
         <table class="table table-bordered">
@@ -99,6 +106,7 @@
         </table>
         <a href="{{url('/admin/products')}}" class="ml-auto">Show All Products</a>
     </div>
+{{-- User section --}}
     <div class="row mb-5">
         <h3>Users</h3>
         <table class="table table-bordered">

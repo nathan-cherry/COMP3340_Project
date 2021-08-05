@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Edit Product</h1>
+{{--    Form for editing product --}}
     {!! Form::open(['action' => ['ProductsController@update', $product->id], 'method'=> 'POST', 'enctype'=> 'multipart/form-data']) !!}
     <div class="form-group">
         {{Form::label('name', 'Name')}}

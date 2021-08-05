@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Edit User</h1>
+{{--    Edit form--}}
     {!! Form::open(['action' => ['AdminController@updateUser', $user->id], 'method'=> 'POST', 'enctype'=> 'multipart/form-data']) !!}
     <div class="form-group">
         {{Form::label('name', 'Name')}}

@@ -26,9 +26,23 @@
 <!-- Using Bootstraps CSS, we will simply have a page of generic text -->
 <!-- This will act as a static page and outline our fictional contact page for the  -->
 <!-- ecommerce Website -->
+<nav class="navbar navbar-expand-lg navbar-dark ">
+
+    <a class="nav-link" href="/COMP3340/Project/">Home <span class="sr-only">(current)</span></a>
+
+
+
+    <a  class="nav-link link-dark" href="/COMP3340/Project/mission">Mission<span class="sr-only">(current)</span></a>
+    <a  class="nav-link" href="/COMP3340/Project/history">History<span class="sr-only">(current)</span></a>
+
+    <a  class="nav-link" href="/COMP3340/Project/legal">Legal<span class="sr-only">(current)</span></a>
+    <a  class="nav-link" href="/COMP3340/Project/contact">Contact<span class="sr-only">(current)</span></a>
+
+
+</nav>
 <div class="container">
     <div class="row">
-        <div class="text-center" w-100>
+        <div class="text-center w-100">
             <h1>Contacting NIMSE </h1>
 
             <br>
@@ -43,6 +57,7 @@
                 <b>Contact Information</b><br><br>
 
                 Our Team at NIMSE makes it a top priority to be available whenever you may need us so we are availaible by the following.
+            </p>
             <table class="table table-dark">
                 <thead>
                 <tr>
@@ -78,7 +93,7 @@
                 </tbody>
             </table>
 
-            </p><hr>
+            <hr>
 
             <b>DISCLAIMER</b>
             <br>

@@ -25,12 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Get User
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
+        // Pass user and theme
         $data = array(
             'user' => $user,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
+        // Go to home page
         return view('home')->with($data);
     }
 }

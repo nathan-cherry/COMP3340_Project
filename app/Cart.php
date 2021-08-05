@@ -13,11 +13,13 @@ class Cart extends Model
     // Timestamps
     public $timestamps = true;
 
+    // Create association with user
     public function user()
     {
         return $this->belongsTo('App\User')->withDefault();
     }
 
+    // Create association with product
     public function product()
     {
         return $this->belongsTo('App\Product')->withDefault();

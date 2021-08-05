@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Create Product</h1>
+{{--     Form for creating product --}}
     {!! Form::open(['action' => 'ProductsController@store', 'method'=> 'POST', 'enctype'=> 'multipart/form-data']) !!}
         <div class="form-group">
             {{Form::label('name', 'Name')}}

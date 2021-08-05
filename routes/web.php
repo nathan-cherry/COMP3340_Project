@@ -27,6 +27,12 @@ Route::get('/mission', 'PageController@mission');
 Route::get('/history', 'PageController@history');
 Route::get('/legal', 'PageController@legal');
 Route::get('/contact', 'PageController@contact');
+Route::get('/marko', 'PageController@marko');
+Route::get('/nathan', 'PageController@nathan');
+Route::get('/ian', 'PageController@ian');
+Route::get('/sehaj', 'PageController@sehaj');
+Route::get('/ehu', 'PageController@ehu');
+Route::get('/join', 'PageController@join');
 
 // Product Controller
 Route::get('/products/men', 'ProductsController@men');

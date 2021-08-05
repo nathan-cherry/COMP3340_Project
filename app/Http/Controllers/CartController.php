@@ -28,7 +28,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        // redirect to home page
+        // redirect to home page (do not want an index page visible for carts)
         return redirect('/');
     }
 
@@ -39,6 +39,7 @@ class CartController extends Controller
      */
     public function create()
     {
+        // Redirect to home page (do not want a default create link)
         return redirect('/');
     }
 
@@ -49,11 +50,14 @@ class CartController extends Controller
      */
     public function createOrder($id)
     {
+        // Get the product associated to the order
         $product = Product::find($id);
+        // Pass theme and product
         $data = array(
             'product' => $product,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
+        // Return the create order view
         return view('cart.create')->with($data);
     }
 
@@ -66,16 +70,22 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate form
         $this->validate($request, [
             'quantity' => 'required',
         ]);
-        // Create Product
+        // Create Order
         $order = new Cart;
+        // Get auth user to add to cart
         $order->user_id = auth()->user()->id;
+        // set product and quantity
         $order->product_id = $request->input('prod_id');
         $order->quantity = $request->input('quantity');
+        // Save order to db
         $order->save();
+        // Create path for auth user's shopping cart
         $location = sprintf('/cart/%d', auth()->user()->id);
+        // Redirect to user's shopping cart
         return redirect($location)->with('success', 'Product Ordered');
     }
 
@@ -87,16 +97,21 @@ class CartController extends Controller
      */
     public function show($id)
     {
+        // Get shopping cart for user's id
         $cart = Cart::where('user_id', $id)->get();
+        // Pass cart, id, and theme
         $data = array(
             'cart' => $cart,
             'id' => $id,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
 
+        // If the user is an admin or it is their shopping cart
         if(auth()->user()->isAdmin or auth()->user()->id == $id){
+            // Return shopping cart view
             return view('cart.show')->with($data);
         } else {
+            // Return to products page with error message
             return redirect('/products')->with('error', 'Unauthorized request');
         }
 
@@ -110,14 +125,19 @@ class CartController extends Controller
      */
     public function edit($id)
     {
+        // Get order
         $order = Cart::find($id);
+        // Pass order and theme
         $data = array(
             'order' => $order,
             'theme' => Theme::orderBy('created_at', 'desc')->first(),
         );
+        // If the user is an admin or it is their shopping cart
         if(auth()->user()->isAdmin or auth()->user()->id == $order->user->id){
+            // Return order edit page
             return view('cart.edit')->with($data);
         } else {
+            // Return to products page with error message
             return redirect('/products')->with('error', 'Unauthorized request');
         }
     }
@@ -131,14 +151,18 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validate form
         $this->validate($request, [
             'quantity' => 'required',
         ]);
-        // Update Record
+        // Get order
         $order = Cart::find($id);
+        // Set quantity
         $order->quantity = $request->input('quantity');
+        // Save Order
         $order->save();
 
+        // Redirect to Cart
         $location = sprintf('/cart/%d', auth()->user()->id);
         return redirect($location)->with('success', 'Order Updated');
     }
@@ -151,8 +175,11 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
+        // Get order
         $order = Cart::find($id);
+        // Delete order
         $order->delete();
+        // Redirect to the cart
         $location = sprintf('/cart/%d', auth()->user()->id);
         return redirect($location)->with('success', 'Deleted Order');
     }
