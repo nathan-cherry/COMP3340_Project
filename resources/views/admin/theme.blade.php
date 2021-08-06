@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create Product</h1>
+    <h1>Update Theme</h1>
 {{--    Theme create form--}}
     {!! Form::open(['action' => 'AdminController@storeTheme', 'method'=> 'POST', 'enctype'=> 'multipart/form-data']) !!}
 

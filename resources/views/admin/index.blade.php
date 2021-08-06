@@ -8,7 +8,7 @@
             their working conditions (online/offline)</p>
         <hr class="my-4">
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">View Admin Documentation</a>
+            <a class="btn btn-primary btn-lg" href="https://github.com/nathan-cherry/COMP3340_Project/wiki/Admin-Documentation" role="button">View Admin Documentation</a>
         </p>
     </div>
 {{-- Theme section --}}

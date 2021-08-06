@@ -10,7 +10,7 @@
         <p>All of our products are produced within Canada and no profit is made on any purchase. After the employees
             are paid, the rest of our income goes right towards our partnership with the WWF. </p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">View User Documentation</a>
+            <a class="btn btn-primary btn-lg" href="https://github.com/nathan-cherry/COMP3340_Project/wiki/User-Documentation" role="button">View User Documentation</a>
         </p>
 
     </div>
